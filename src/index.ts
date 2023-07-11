@@ -35,9 +35,9 @@ const myComponent = (): KeylimeNode => {
   const [index, setIndex] = useState(0);
 
   useEffect(async () => {
-    const response = await fetch("https://ghibliapi.vercel.app/films");
+    const response = await fetch("https://ghibliapi.vercel.app/films/");
     const movies = await response.json();
-    console.log(movies);
+
     setMovies(movies);
     setIndex(getRandomMovie(movies.length));
   }, []);
@@ -51,6 +51,16 @@ const myComponent = (): KeylimeNode => {
         text("Get a Ghibli movie to watch :)"),
       ]),
       element(
+        "u",
+        {
+          className: "linkButton",
+          on: {
+            click: () => setIndex(getRandomMovie(movies.length)),
+          },
+        },
+        [text("Click me")]
+      ),
+            element(
         "u",
         {
           className: "linkButton",
